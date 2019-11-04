@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public float JumpHeight;
     private Rigidbody playerRig;
     public MoveLimits playerBoundary;
+    private Animator playerAnime;
 
     //public float PlayerRunSpeed;
     //private bool isRunning;
@@ -18,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         playerRig = GetComponent<Rigidbody>();
+        playerAnime = GetComponent<Animator>();
     }
 
     bool GroundCheck()
@@ -51,6 +53,24 @@ public class PlayerControl : MonoBehaviour
         if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
         {
             transform.position += transform.forward * Time.deltaTime * PlayerMoveSpeed * VerticalMovement;
+        }
+
+        if(HorizontalMovement < 0f)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = true;
+        }
+        else if (HorizontalMovement > 0f)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+        }
+
+        if(HorizontalMovement != 0f || VerticalMovement != 0f)
+        {
+            playerAnime.SetBool("Moving", true);
+        }
+        else
+        {
+            playerAnime.SetBool("Moving", false);
         }
 
         transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * HorizontalMovement;        
