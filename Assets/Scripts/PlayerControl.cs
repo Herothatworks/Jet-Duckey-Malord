@@ -8,6 +8,8 @@ public class PlayerControl : MonoBehaviour
     public float PlayerMoveSpeed;
     public float JumpHeight;
     private Rigidbody playerRig;
+    public MoveLimits playerBoundary;
+
     //public float PlayerRunSpeed;
     //private bool isRunning;
 
@@ -45,7 +47,12 @@ public class PlayerControl : MonoBehaviour
             //transform.position += transform.up * Time.deltaTime * JumpHeight;
         }
 
-        transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * HorizontalMovement;
-        transform.position += transform.forward * Time.deltaTime * PlayerMoveSpeed * VerticalMovement;
+        //Keeps players within the street to avoid running too far off camera up or down.
+        if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
+        {
+            transform.position += transform.forward * Time.deltaTime * PlayerMoveSpeed * VerticalMovement;
+        }
+
+        transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * HorizontalMovement;        
     }
 }
