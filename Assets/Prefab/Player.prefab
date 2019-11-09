@@ -63,9 +63,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMoveSpeed: 1
   JumpHeight: 4
+  PlayerRunSpeed: 2
   playerBoundary:
     Upper: 3
     Lower: 2
+  DashLength: 2
 --- !u!54 &8679177440067661742
 Rigidbody:
   m_ObjectHideFlags: 0

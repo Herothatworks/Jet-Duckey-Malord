@@ -7,13 +7,15 @@ public class PlayerControl : MonoBehaviour
 {
     public float PlayerMoveSpeed;
     public float JumpHeight;
+    public float PlayerRunSpeed;
+
     private Rigidbody playerRig;
     public MoveLimits playerBoundary;
     private Animator playerAnime;
 
-    //public float PlayerRunSpeed;
-    //private bool isRunning;
-
+    public float DashLength;
+    private ComboMoves DashRight = new ComboMoves(new string[] { "right", "right" }, 0.3f);
+    private ComboMoves DashLeft = new ComboMoves(new string[] { "left", "left" }, 0.3f);
 
     // Start is called before the first frame update
     void Start()
@@ -44,9 +46,8 @@ public class PlayerControl : MonoBehaviour
         //Add Jump stuff
         if(GroundCheck() && Input.GetButtonDown("Jump"))
         {
-            //playerRig.AddForce(transform.up * JumpHeight * Time.deltaTime);
             playerRig.AddForce(0, 1 * JumpHeight, 0, ForceMode.Impulse);
-            //transform.position += transform.up * Time.deltaTime * JumpHeight;
+            playerAnime.SetTrigger("Jump");
         }
 
         //Keeps players within the street to avoid running too far off camera up or down.
@@ -73,6 +74,23 @@ public class PlayerControl : MonoBehaviour
             playerAnime.SetBool("Moving", false);
         }
 
-        transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * HorizontalMovement;        
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.position += transform.right * Time.deltaTime * PlayerRunSpeed * HorizontalMovement;
+        }
+        else
+        {
+            transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * HorizontalMovement;
+        }
+
+        //Combos for the game
+        if(DashLeft.CheckCombo())
+        {
+            transform.position -= transform.right * DashLength;
+        }
+        if(DashRight.CheckCombo())
+        {
+            transform.position += transform.right * DashLength;
+        }
     }
 }
