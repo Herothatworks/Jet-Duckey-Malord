@@ -15,11 +15,24 @@ public class EnemyController : MonoBehaviour
     private float AttackTimer = 0f;
     private bool JustAttacked;
 
+    public float Hitpoints;
+    public float currentHP;
+
     // Start is called before the first frame update
     void Start()
     {
         AIAnime = GetComponent<Animator>();
         trackPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        currentHP = Hitpoints;
+    }
+
+    public void TakeHit(float damageTaken)
+    {
+        currentHP -= damageTaken;
+        
+        if (currentHP > Hitpoints) currentHP = Hitpoints;
+
+        if (currentHP <= 0) gameObject.SetActive(false);
     }
 
     // Update is called once per frame

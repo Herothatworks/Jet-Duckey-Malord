@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public float PlayerMoveSpeed;
     public float JumpHeight;
     public float PlayerRunSpeed;
+    private bool facingRight = true;
 
     //This controls the player's limits in movement
     private Rigidbody playerRig;
@@ -36,6 +37,8 @@ public class PlayerControl : MonoBehaviour
     private ComboMoves DashRight = new ComboMoves(new List<KeyCode>() { JetRight, JetRight }, 0.3f);
 
     //Punch attack stuff.
+    public float PunchDamage;
+
     public float punchCooldown;
     public float timeAllowedBetweenPunches;
     public float singlePunchCooldown;
@@ -71,6 +74,18 @@ public class PlayerControl : MonoBehaviour
         return false;
     }
 
+    void MakeAttack(float Damage)
+    {
+        RaycastHit hit;
+
+        if(Physics.Raycast(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), out hit, .3f))
+        {
+            if(hit.transform.CompareTag("Enemy"))
+            {
+                hit.transform.GetComponent<EnemyController>().TakeHit(Damage);
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -78,6 +93,8 @@ public class PlayerControl : MonoBehaviour
         //Get the move controls
         float HorizontalMovement = Input.GetAxisRaw("Horizontal");
         float VerticalMovement = Input.GetAxisRaw("Vertical");
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), Color.red, .3f);
 
         //This is for running mechanics
         float movingpace = 0f;
@@ -96,10 +113,12 @@ public class PlayerControl : MonoBehaviour
         if(HorizontalMovement < 0f)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = true;
+            facingRight = false;
         }
         else if (HorizontalMovement > 0f)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = false;
+            facingRight = true;
         }
 
         //Sets the player to running (or not running)
@@ -142,6 +161,9 @@ public class PlayerControl : MonoBehaviour
             playerAnime.SetFloat("Punch", punchCount);
             playerAnime.SetTrigger("Punching");
             punchCount += 0.5f;
+
+            MakeAttack(PunchDamage);
+
             justPunched = true;
             punchBetweenCounter = 0f; //Rest every time a punch goes through.
             queuePunch = true;
