@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8679177440067661740}
-  - component: {fileID: 8679177440067661731}
   - component: {fileID: 8679177440067661741}
   - component: {fileID: 8679177440067661742}
   - component: {fileID: 8679177440067661743}
+  - component: {fileID: 2790321048944079}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -35,20 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8679177440067661731
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8679177440067661730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 0.3
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8679177440067661741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,11 +49,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMoveSpeed: 1
   JumpHeight: 4
-  PlayerRunSpeed: 2
+  PlayerRunSpeed: 3
   playerBoundary:
     Upper: 3
     Lower: 2
+    LeftBound: -12.83
+    RightBound: 91.96
   DashLength: 2
+  punchCooldown: 3
+  timeAllowedBetweenPunches: 1
+  singlePunchCooldown: 0.5
 --- !u!54 &8679177440067661742
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -103,6 +94,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &2790321048944079
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679177440067661730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35, y: 0.6, z: 0.25}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8679177440445568277
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8679177440445568277}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.365, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8679177440067661740}

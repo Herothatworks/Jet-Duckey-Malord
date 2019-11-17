@@ -9,20 +9,28 @@ public class MoveLimits
 {
     public float Upper;
     public float Lower;
+    public float LeftBound;
+    public float RightBound;
 }
 
 public class ComboMoves
 {
     public string ComboName;
-    public string[] MoveList;
+    public List<KeyCode> MoveList;
     private int currentMove = 0;
 
     public float ComboKeyTimer = 0.3f;
     private float LastButtonPressed;
 
-    public ComboMoves(string[] movesToMakeCombo, float timer)
+    public ComboMoves(List<KeyCode> movesToMakeCombo, float timer)
     {
-        MoveList = movesToMakeCombo;
+        MoveList = new List<KeyCode>();
+
+        foreach(KeyCode move in movesToMakeCombo)
+        {
+            MoveList.Add(move);
+        }
+
         ComboKeyTimer = timer;
     }
 
@@ -30,23 +38,15 @@ public class ComboMoves
     {
         if (Time.time > LastButtonPressed + ComboKeyTimer) currentMove = 0;
         {
-            if (currentMove < MoveList.Length)
+            if (currentMove < MoveList.Count)
             {
-                if ((MoveList[currentMove] == "down" && Input.GetKeyDown(KeyCode.S)) ||
-                    (MoveList[currentMove] == "up" && Input.GetKeyDown(KeyCode.W)) ||
-                    (MoveList[currentMove] == "left" && Input.GetKeyDown(KeyCode.A)) ||
-                    (MoveList[currentMove] == "right" && Input.GetKeyDown(KeyCode.D)) ||
-                    (MoveList[currentMove] == "punch" && Input.GetKeyDown(KeyCode.O)) ||
-                    (MoveList[currentMove] == "kick" && Input.GetKeyDown(KeyCode.P)) ||
-                    (MoveList[currentMove] == "grab" && Input.GetKeyDown(KeyCode.Semicolon)) ||
-                    (MoveList[currentMove] == "block" && Input.GetKeyDown(KeyCode.L)) ||
-                    (MoveList[currentMove] == "ability" && Input.GetKeyDown(KeyCode.K)))
+                if (Input.GetKeyDown(MoveList[currentMove]))
                 {
                     LastButtonPressed = Time.time;
                     ++currentMove;
                 }
 
-                if (currentMove >= MoveList.Length)
+                if (currentMove >= MoveList.Count)
                 {
                     currentMove = 0;
                     return true;
