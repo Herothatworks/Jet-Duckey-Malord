@@ -7,10 +7,12 @@ public class EventSpawned : MonoBehaviour
     public bool WaveEvent;
     public int WaveCount;
     public List<SpawnMob> waveMobs;
-    private List<GameObject> currentEnemies;
-    private int currentWave = 0;
-    private bool EventStarted = false;
-    private bool EventConcluded = false;
+
+    //Return these to private once you are done please.
+    public List<GameObject> currentEnemies; //
+    public int currentWave = 0; //
+    public bool EventStarted = false; //
+    public bool EventConcluded = false; //
     
 
 
@@ -26,7 +28,7 @@ public class EventSpawned : MonoBehaviour
         if(EventStarted && !EventConcluded)
         {
             //If the enemy list is empty, the event has been started and is not finished
-            if(currentEnemies == null)
+            if(currentEnemies.Count < 1)
             {
                 //We move the wave counter up
                 ++currentWave;
@@ -46,7 +48,7 @@ public class EventSpawned : MonoBehaviour
                         if (spawnMob.WaveCount == currentWave)
                         {
                             GameObject newMob;
-                            newMob = Instantiate(spawnMob.EnemyMob, spawnMob.SpawnLocation) as GameObject;
+                            newMob = Instantiate(spawnMob.EnemyMob, spawnMob.SpawnLocation.position, Quaternion.identity, transform) as GameObject;
                             newMob.GetComponent<EnemyController>().SetStats(spawnMob.HitPoints, spawnMob.DamageDone);
                             currentEnemies.Add(newMob);
                         }
