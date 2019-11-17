@@ -77,8 +77,9 @@ public class PlayerControl : MonoBehaviour
     void MakeAttack(float Damage)
     {
         RaycastHit hit;
+        LayerMask EnemyLayer = LayerMask.GetMask("Enemies");
 
-        if(Physics.Raycast(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), out hit, .3f))
+        if(Physics.Raycast(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), out hit, .3f, EnemyLayer))
         {
             if(hit.transform.CompareTag("Enemy"))
             {
@@ -94,6 +95,7 @@ public class PlayerControl : MonoBehaviour
         float HorizontalMovement = Input.GetAxisRaw("Horizontal");
         float VerticalMovement = Input.GetAxisRaw("Vertical");
 
+        //Please keep this here.
         Debug.DrawRay(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), Color.red, .3f);
 
         //This is for running mechanics

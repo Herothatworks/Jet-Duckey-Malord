@@ -1341,6 +1341,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4177559700219083029, guid: 7d880b2418116fc449ab89e1ad9d1378,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720586340561120127, guid: 7d880b2418116fc449ab89e1ad9d1378,
+        type: 3}
+      propertyPath: EnemyStopDistance
+      value: 0.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d880b2418116fc449ab89e1ad9d1378, type: 3}
 --- !u!1001 &8679177439734062980
@@ -1409,16 +1419,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8679177440067661741, guid: 2e9cceba2ee923e40aca944d1a5e60d6,
-        type: 3}
-      propertyPath: playerBoundary.RightBound
-      value: 51
-      objectReference: {fileID: 0}
-    - target: {fileID: 8679177440067661741, guid: 2e9cceba2ee923e40aca944d1a5e60d6,
-        type: 3}
-      propertyPath: PunchDamage
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e9cceba2ee923e40aca944d1a5e60d6, type: 3}

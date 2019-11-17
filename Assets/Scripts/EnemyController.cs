@@ -18,12 +18,21 @@ public class EnemyController : MonoBehaviour
     public float Hitpoints;
     public float currentHP;
 
+    private bool WaveSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
         AIAnime = GetComponent<Animator>();
         trackPlayer = GameObject.FindGameObjectWithTag("Player").transform;
         currentHP = Hitpoints;
+    }
+
+    public void SetStats(int HP, int Dmg)
+    {
+        Hitpoints = HP;
+        currentHP = Hitpoints;
+        AttackDamage = Dmg;
     }
 
     public void TakeHit(float damageTaken)
@@ -56,12 +65,12 @@ public class EnemyController : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().flipX = true;
         }
 
-        if (trackPlayer.position.z - EnemyStopDistance > transform.position.z)
+        if (trackPlayer.position.z - 0.01f > transform.position.z)
         {
             verticalMovement = 1f;
             movementSpeed = 0.5f;
         }
-        else if (trackPlayer.position.z + EnemyStopDistance < transform.position.z)
+        else if (trackPlayer.position.z + 0.01f < transform.position.z)
         {
             verticalMovement = -1f;
             movementSpeed = 0.5f;

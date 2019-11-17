@@ -54,8 +54,9 @@ MonoBehaviour:
     Upper: 3
     Lower: 2
     LeftBound: -12.83
-    RightBound: 91.96
+    RightBound: 51
   DashLength: 2
+  PunchDamage: 1
   punchCooldown: 3
   timeAllowedBetweenPunches: 1
   singlePunchCooldown: 0.5

@@ -13,6 +13,16 @@ public class MoveLimits
     public float RightBound;
 }
 
+[Serializable]
+public class SpawnMob
+{
+    public GameObject EnemyMob;
+    public Transform SpawnLocation;
+    public int WaveCount;
+    public int HitPoints;
+    public int DamageDone;
+}
+
 public class ComboMoves
 {
     public string ComboName;
