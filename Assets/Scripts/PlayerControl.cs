@@ -152,6 +152,12 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+        //Please keep this here....
+        if(!facingRight)
+        {
+            VerticalMovement *= -1;
+        }
+
         //Sets the player to running (or not running)
         if (Input.GetKey(KeyCode.LeftShift))
         {
