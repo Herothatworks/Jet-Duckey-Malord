@@ -24,7 +24,6 @@ public class CameraMove : MonoBehaviour
         {
             Vector3 newLocation = transform.position;
             newLocation.x = playerLocation.position.x + CameraOffset.x;
-
             transform.position = newLocation;
         }
     }

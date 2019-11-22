@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyMoveSpeed: 1
-  EnemyStopDistance: 0.5
+  EnemyStopDistance: 0.4
   AttackDelay: 1.5
   AttackDamage: 0
   Hitpoints: 3

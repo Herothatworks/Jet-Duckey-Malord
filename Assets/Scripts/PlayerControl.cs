@@ -38,6 +38,8 @@ public class PlayerControl : MonoBehaviour
 
     //Punch attack stuff.
     public float PunchDamage;
+    private Transform punchBox;
+    public GameObject punchForce;
 
     public float punchCooldown;
     public float timeAllowedBetweenPunches;
@@ -54,10 +56,20 @@ public class PlayerControl : MonoBehaviour
     private float punchCount = 0f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerRig = GetComponent<Rigidbody>();
         playerAnime = GetComponent<Animator>();
+        playerBoundary.LeftBound = GameObject.FindGameObjectWithTag("LeftLimit").transform.position.x;
+        playerBoundary.RightBound = GameObject.FindGameObjectWithTag("RightLimit").transform.position.x;
+
+        foreach(Transform checkBoxes in transform)
+        {
+            if (checkBoxes.CompareTag("PunchArea"))
+            {
+                punchBox = checkBoxes;
+            }
+        }
     }
 
     //Checks to make sure the player can jump, so we don't have a flying character - yet
@@ -74,7 +86,8 @@ public class PlayerControl : MonoBehaviour
         return false;
     }
 
-    void MakeAttack(float Damage)
+    //Do not delete yet
+    void MakeAttackOld(float Damage)
     {
         RaycastHit hit;
         LayerMask EnemyLayer = LayerMask.GetMask("Enemies");
@@ -88,8 +101,16 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    //Instantiate a punch instead of raycast
+    void MakeAttack(float Damage)
+    {
+        GameObject newPunch = Instantiate(punchForce, punchBox.position, Quaternion.identity, transform) as GameObject;
+        newPunch.GetComponent<PunchAttack>().Damage = Damage;
+        newPunch.GetComponent<PunchAttack>().hurtEnemy = true;
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Get the move controls
         float HorizontalMovement = Input.GetAxisRaw("Horizontal");
@@ -114,13 +135,21 @@ public class PlayerControl : MonoBehaviour
         //Sets the direction the player is facing, left or right
         if(HorizontalMovement < 0f)
         {
-            GetComponentInChildren<SpriteRenderer>().flipX = true;
-            facingRight = false;
+            //GetComponentInChildren<SpriteRenderer>().flipX = true;
+            if (facingRight)
+            {
+                transform.Rotate(0, 180f, 0);
+                facingRight = false;
+            }
         }
         else if (HorizontalMovement > 0f)
         {
-            GetComponentInChildren<SpriteRenderer>().flipX = false;
-            facingRight = true;
+            //GetComponentInChildren<SpriteRenderer>().flipX = false;
+            if (!facingRight)
+            {
+                transform.Rotate(0, -180f, 0);
+                facingRight = true;
+            }
         }
 
         //Sets the player to running (or not running)
@@ -128,7 +157,7 @@ public class PlayerControl : MonoBehaviour
         {
             if ((transform.position.x > playerBoundary.LeftBound && HorizontalMovement < 0) || (transform.position.x < playerBoundary.RightBound && HorizontalMovement > 0))
             {
-                transform.position += transform.right * Time.deltaTime * PlayerRunSpeed * HorizontalMovement;
+                transform.position += transform.right * Time.deltaTime * PlayerRunSpeed * Mathf.Abs(HorizontalMovement);
             }
             if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
             {
@@ -140,7 +169,7 @@ public class PlayerControl : MonoBehaviour
         {
             if ((transform.position.x > playerBoundary.LeftBound && HorizontalMovement < 0) || (transform.position.x < playerBoundary.RightBound && HorizontalMovement > 0))
             {
-                transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * HorizontalMovement;
+                transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * Mathf.Abs(HorizontalMovement);
             }
             if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
             {
