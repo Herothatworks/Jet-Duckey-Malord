@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4720586340166685132}
   - component: {fileID: 4720586340166685133}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TempModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4720586340561120127}
   - component: {fileID: 1783083008}
   - component: {fileID: 1783083007}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Enemy (JetClone)
   m_TagString: Enemy
   m_Icon: {fileID: 0}

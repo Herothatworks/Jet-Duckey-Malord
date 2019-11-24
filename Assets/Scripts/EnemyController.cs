@@ -38,6 +38,9 @@ public class EnemyController : MonoBehaviour
     public void TakeHit(float damageTaken)
     {
         currentHP -= damageTaken;
+
+        AIAnime.SetTrigger("TakeDamage");
+        JustAttacked = true;
         
         if (currentHP > Hitpoints) currentHP = Hitpoints;
 
@@ -100,6 +103,7 @@ public class EnemyController : MonoBehaviour
                 if(!JustAttacked)
                 {
                     AIAnime.SetTrigger("Punching");
+                    other.GetComponent<PlayerControl>().TakeDamage(AttackDamage);
                     JustAttacked = true;
                 }
                 break;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class PlayerControl : MonoBehaviour
     public float JumpHeight;
     public float PlayerRunSpeed;
     private bool facingRight = true;
+
+    //Player Health Stuff
+    public float PlayerHealth;
+    private float currentHealth;
 
     //This controls the player's limits in movement
     private Rigidbody playerRig;
@@ -38,22 +43,31 @@ public class PlayerControl : MonoBehaviour
 
     //Punch attack stuff.
     public float PunchDamage;
+    public float KickDamage;
     private Transform punchBox;
     public GameObject punchForce;
 
     public float punchCooldown;
+    public float kickCooldown;
     public float timeAllowedBetweenPunches;
     public float singlePunchCooldown;
 
-    private float punchTimer;
+    private float punchTimer;    
     private float punchBetweenCounter;
     private float singlePunchCounter;
 
     private bool cooldownPunch;
     private bool justPunched;
+    private bool justKicked;
     private bool queuePunch;
 
     private float punchCount = 0f;
+
+    //Damage Taking stuff
+    private bool isInvulnerable = false;
+    private float invulnTimer = 0f;
+    public float DamageInvulnerabilityTimer;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -70,6 +84,8 @@ public class PlayerControl : MonoBehaviour
                 punchBox = checkBoxes;
             }
         }
+
+        currentHealth = PlayerHealth;
     }
 
     //Checks to make sure the player can jump, so we don't have a flying character - yet
@@ -86,19 +102,27 @@ public class PlayerControl : MonoBehaviour
         return false;
     }
 
-    //Do not delete yet
-    void MakeAttackOld(float Damage)
+    public void TakeDamage(float Health)
     {
-        RaycastHit hit;
-        LayerMask EnemyLayer = LayerMask.GetMask("Enemies");
 
-        if(Physics.Raycast(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), out hit, .3f, EnemyLayer))
+        if (!isInvulnerable)
         {
-            if(hit.transform.CompareTag("Enemy"))
-            {
-                hit.transform.GetComponent<EnemyController>().TakeHit(Damage);
-            }
+            currentHealth -= Health;
+            isInvulnerable = true;
+            playerAnime.SetTrigger("TakeDamage");
         }
+
+        if (currentHealth > PlayerHealth)
+        {
+            currentHealth = PlayerHealth; //Don't go over max health
+        }
+
+        if (currentHealth <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+
     }
 
     //Instantiate a punch instead of raycast
@@ -129,13 +153,21 @@ public class PlayerControl : MonoBehaviour
             playerAnime.SetTrigger("Jump");
         }
 
-        //Keeps players within the street to avoid running too far off camera up or down.
+        //Invulnerability Timer
+        if(isInvulnerable)
+        {
+            invulnTimer += Time.deltaTime;
+            if(invulnTimer >= DamageInvulnerabilityTimer)
+            {
+                invulnTimer = 0f;
+                isInvulnerable = false;
+            }
+        }
         
 
         //Sets the direction the player is facing, left or right
         if(HorizontalMovement < 0f)
         {
-            //GetComponentInChildren<SpriteRenderer>().flipX = true;
             if (facingRight)
             {
                 transform.Rotate(0, 180f, 0);
@@ -144,7 +176,6 @@ public class PlayerControl : MonoBehaviour
         }
         else if (HorizontalMovement > 0f)
         {
-            //GetComponentInChildren<SpriteRenderer>().flipX = false;
             if (!facingRight)
             {
                 transform.Rotate(0, -180f, 0);
@@ -152,10 +183,10 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        //Please keep this here....
-        if(!facingRight)
+        //Have a way to quit
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
-            VerticalMovement *= -1;
+            SceneManager.LoadScene("MainMenu");
         }
 
         //Sets the player to running (or not running)
@@ -167,6 +198,10 @@ public class PlayerControl : MonoBehaviour
             }
             if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
             {
+                if (!facingRight)
+                {
+                    VerticalMovement *= -1;
+                }
                 transform.position += transform.forward * Time.deltaTime * PlayerRunSpeed * VerticalMovement;
             }
             movingpace = 1f;
@@ -179,6 +214,10 @@ public class PlayerControl : MonoBehaviour
             }
             if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
             {
+                if (!facingRight)
+                {
+                    VerticalMovement *= -1;
+                }
                 transform.position += transform.forward * Time.deltaTime * PlayerMoveSpeed * VerticalMovement;
             }
             movingpace = 0.5f;
@@ -193,7 +232,7 @@ public class PlayerControl : MonoBehaviour
         playerAnime.SetFloat("Speed", movingpace);
 
         //Punch Attack Setup
-        if(Input.GetKeyDown(JetPunch) && !cooldownPunch && !queuePunch)
+        if(Input.GetKeyDown(JetPunch) && !cooldownPunch && !queuePunch && !justKicked)
         {
             playerAnime.SetFloat("Punch", punchCount);
             playerAnime.SetTrigger("Punching");
@@ -203,6 +242,7 @@ public class PlayerControl : MonoBehaviour
 
             justPunched = true;
             punchBetweenCounter = 0f; //Rest every time a punch goes through.
+            punchTimer = 0f;
             queuePunch = true;
             if(punchCount > 1)
             {
@@ -211,7 +251,25 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if(queuePunch)
+        if (Input.GetKeyDown(JetKick) && !cooldownPunch && !queuePunch && !justKicked)
+        {
+            playerAnime.SetTrigger("Kick");
+            justKicked = true;
+            MakeAttack(KickDamage);
+        }
+
+        if(justKicked)
+        {
+            singlePunchCounter += Time.deltaTime;
+            if(singlePunchCounter >= kickCooldown)
+            {
+                singlePunchCounter = 0f;
+                justKicked = false;
+            }
+        }
+
+
+        if (queuePunch)
         {
             singlePunchCounter += Time.deltaTime;
             if(singlePunchCounter >= singlePunchCooldown)
