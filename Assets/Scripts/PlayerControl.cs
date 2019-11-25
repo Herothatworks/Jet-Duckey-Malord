@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     private bool facingRight = true;
 
     //Player Health Stuff
+    public Image healthBar;
     public float PlayerHealth;
     private float currentHealth;
 
@@ -68,6 +69,11 @@ public class PlayerControl : MonoBehaviour
     private float invulnTimer = 0f;
     public float DamageInvulnerabilityTimer;
 
+    //Death Stuff
+    private bool deathStart = false;
+    private float deathDelay = 0.5f;
+    private float deathCount = 0f;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -86,6 +92,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         currentHealth = PlayerHealth;
+        healthBar.fillAmount = 1f;
     }
 
     //Checks to make sure the player can jump, so we don't have a flying character - yet
@@ -119,9 +126,10 @@ public class PlayerControl : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            deathStart = true;
         }
 
+        healthBar.fillAmount = currentHealth / PlayerHealth;
 
     }
 
@@ -136,178 +144,195 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Get the move controls
-        float HorizontalMovement = Input.GetAxisRaw("Horizontal");
-        float VerticalMovement = Input.GetAxisRaw("Vertical");
-
-        //Please keep this here.
-        Debug.DrawRay(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), Color.red, .3f);
-
-        //This is for running mechanics
-        float movingpace = 0f;
-
-        //Add Jump stuff
-        if(GroundCheck() && Input.GetKeyDown(JetJump))
+        if (!deathStart)
         {
-            playerRig.AddForce(0, 1 * JumpHeight, 0, ForceMode.Impulse);
-            playerAnime.SetTrigger("Jump");
-        }
+            //Get the move controls
+            float HorizontalMovement = Input.GetAxisRaw("Horizontal");
+            float VerticalMovement = Input.GetAxisRaw("Vertical");
 
-        //Invulnerability Timer
-        if(isInvulnerable)
-        {
-            invulnTimer += Time.deltaTime;
-            if(invulnTimer >= DamageInvulnerabilityTimer)
+            //Please keep this here.
+            Debug.DrawRay(transform.position, transform.TransformDirection(facingRight ? Vector3.right : -Vector3.right), Color.red, .3f);
+
+            //This is for running mechanics
+            float movingpace = 0f;
+
+            //Add Jump stuff
+            if (GroundCheck() && Input.GetKeyDown(JetJump))
             {
-                invulnTimer = 0f;
-                isInvulnerable = false;
+                playerRig.AddForce(0, 1 * JumpHeight, 0, ForceMode.Impulse);
+                playerAnime.SetTrigger("Jump");
             }
-        }
-        
 
-        //Sets the direction the player is facing, left or right
-        if(HorizontalMovement < 0f)
-        {
-            if (facingRight)
+            //Invulnerability Timer
+            if (isInvulnerable)
             {
-                transform.Rotate(0, 180f, 0);
-                facingRight = false;
+                invulnTimer += Time.deltaTime;
+                if (invulnTimer >= DamageInvulnerabilityTimer)
+                {
+                    invulnTimer = 0f;
+                    isInvulnerable = false;
+                }
             }
-        }
-        else if (HorizontalMovement > 0f)
-        {
-            if (!facingRight)
-            {
-                transform.Rotate(0, -180f, 0);
-                facingRight = true;
-            }
-        }
 
-        //Have a way to quit
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
 
-        //Sets the player to running (or not running)
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            if ((transform.position.x > playerBoundary.LeftBound && HorizontalMovement < 0) || (transform.position.x < playerBoundary.RightBound && HorizontalMovement > 0))
+            //Sets the direction the player is facing, left or right
+            if (HorizontalMovement < 0f)
             {
-                transform.position += transform.right * Time.deltaTime * PlayerRunSpeed * Mathf.Abs(HorizontalMovement);
+                if (facingRight)
+                {
+                    transform.Rotate(0, 180f, 0);
+                    facingRight = false;
+                }
             }
-            if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
+            else if (HorizontalMovement > 0f)
             {
                 if (!facingRight)
                 {
-                    VerticalMovement *= -1;
+                    transform.Rotate(0, -180f, 0);
+                    facingRight = true;
                 }
-                transform.position += transform.forward * Time.deltaTime * PlayerRunSpeed * VerticalMovement;
             }
-            movingpace = 1f;
+
+            //Have a way to quit
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+
+            //Sets the player to running (or not running)
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if ((transform.position.x > playerBoundary.LeftBound && HorizontalMovement < 0) || (transform.position.x < playerBoundary.RightBound && HorizontalMovement > 0))
+                {
+                    transform.position += transform.right * Time.deltaTime * PlayerRunSpeed * Mathf.Abs(HorizontalMovement);
+                }
+                if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
+                {
+                    if (!facingRight)
+                    {
+                        VerticalMovement *= -1;
+                    }
+                    transform.position += transform.forward * Time.deltaTime * PlayerRunSpeed * VerticalMovement;
+                }
+                movingpace = 1f;
+            }
+            else
+            {
+                if ((transform.position.x > playerBoundary.LeftBound && HorizontalMovement < 0) || (transform.position.x < playerBoundary.RightBound && HorizontalMovement > 0))
+                {
+                    transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * Mathf.Abs(HorizontalMovement);
+                }
+                if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
+                {
+                    if (!facingRight)
+                    {
+                        VerticalMovement *= -1;
+                    }
+                    transform.position += transform.forward * Time.deltaTime * PlayerMoveSpeed * VerticalMovement;
+                }
+                movingpace = 0.5f;
+            }
+
+            if (HorizontalMovement == 0 && VerticalMovement == 0)
+            {
+                movingpace = 0f;
+            }
+
+            //Lets the animator know if we are moving or not.
+            playerAnime.SetFloat("Speed", movingpace);
+
+            //Punch Attack Setup
+            if (Input.GetKeyDown(JetPunch) && !cooldownPunch && !queuePunch && !justKicked)
+            {
+                playerAnime.SetFloat("Punch", punchCount);
+                playerAnime.SetTrigger("Punching");
+                punchCount += 0.5f;
+
+                MakeAttack(PunchDamage);
+
+                justPunched = true;
+                punchBetweenCounter = 0f; //Rest every time a punch goes through.
+                punchTimer = 0f;
+                queuePunch = true;
+                if (punchCount > 1)
+                {
+                    cooldownPunch = true;
+                    punchCount = 0f;
+                }
+            }
+
+            if (Input.GetKeyDown(JetKick) && !cooldownPunch && !queuePunch && !justKicked)
+            {
+                playerAnime.SetTrigger("Kick");
+                justKicked = true;
+                MakeAttack(KickDamage);
+            }
+
+            if (justKicked)
+            {
+                singlePunchCounter += Time.deltaTime;
+                if (singlePunchCounter >= kickCooldown)
+                {
+                    singlePunchCounter = 0f;
+                    justKicked = false;
+                }
+            }
+
+
+            if (queuePunch)
+            {
+                singlePunchCounter += Time.deltaTime;
+                if (singlePunchCounter >= singlePunchCooldown)
+                {
+                    singlePunchCounter = 0f;
+                    queuePunch = false;
+                }
+            }
+
+            if (justPunched)
+            {
+                punchBetweenCounter += Time.deltaTime;
+                if (punchBetweenCounter > timeAllowedBetweenPunches)
+                {
+                    punchCount = 0f;
+                    punchBetweenCounter = 0f;
+                    justPunched = false;
+                }
+            }
+
+            if (cooldownPunch)
+            {
+                punchTimer += Time.deltaTime;
+                if (punchTimer < punchCooldown)
+                {
+                    punchTimer = 0f;
+                    cooldownPunch = false;
+                }
+            }
+
+            //Combos for the game
+            if (DashLeft.CheckCombo() && transform.position.x > playerBoundary.LeftBound + DashLength)
+            {
+                if(facingRight)
+                    transform.position -= transform.right * DashLength;
+                else
+                    transform.position += transform.right * DashLength;
+            }
+            if (DashRight.CheckCombo() && transform.position.x < playerBoundary.RightBound - DashLength)
+            {
+                if(facingRight)
+                    transform.position += transform.right * DashLength;
+                else
+                    transform.position -= transform.right * DashLength;
+            }
         }
         else
         {
-            if ((transform.position.x > playerBoundary.LeftBound && HorizontalMovement < 0) || (transform.position.x < playerBoundary.RightBound && HorizontalMovement > 0))
+            deathCount += Time.deltaTime;
+            if (deathCount >= deathDelay)
             {
-                transform.position += transform.right * Time.deltaTime * PlayerMoveSpeed * Mathf.Abs(HorizontalMovement);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-            if ((transform.position.z > playerBoundary.Lower && VerticalMovement < 0) || (transform.position.z < playerBoundary.Upper && VerticalMovement > 0))
-            {
-                if (!facingRight)
-                {
-                    VerticalMovement *= -1;
-                }
-                transform.position += transform.forward * Time.deltaTime * PlayerMoveSpeed * VerticalMovement;
-            }
-            movingpace = 0.5f;
-        }
-
-        if(HorizontalMovement == 0 && VerticalMovement ==0)
-        {
-            movingpace = 0f;
-        }
-
-        //Lets the animator know if we are moving or not.
-        playerAnime.SetFloat("Speed", movingpace);
-
-        //Punch Attack Setup
-        if(Input.GetKeyDown(JetPunch) && !cooldownPunch && !queuePunch && !justKicked)
-        {
-            playerAnime.SetFloat("Punch", punchCount);
-            playerAnime.SetTrigger("Punching");
-            punchCount += 0.5f;
-
-            MakeAttack(PunchDamage);
-
-            justPunched = true;
-            punchBetweenCounter = 0f; //Rest every time a punch goes through.
-            punchTimer = 0f;
-            queuePunch = true;
-            if(punchCount > 1)
-            {
-                cooldownPunch = true;
-                punchCount = 0f;
-            }
-        }
-
-        if (Input.GetKeyDown(JetKick) && !cooldownPunch && !queuePunch && !justKicked)
-        {
-            playerAnime.SetTrigger("Kick");
-            justKicked = true;
-            MakeAttack(KickDamage);
-        }
-
-        if(justKicked)
-        {
-            singlePunchCounter += Time.deltaTime;
-            if(singlePunchCounter >= kickCooldown)
-            {
-                singlePunchCounter = 0f;
-                justKicked = false;
-            }
-        }
-
-
-        if (queuePunch)
-        {
-            singlePunchCounter += Time.deltaTime;
-            if(singlePunchCounter >= singlePunchCooldown)
-            {
-                singlePunchCounter = 0f;
-                queuePunch = false;
-            }
-        }
-
-        if(justPunched)
-        {
-            punchBetweenCounter += Time.deltaTime;
-            if(punchBetweenCounter > timeAllowedBetweenPunches)
-            {                
-                punchCount = 0f;
-                punchBetweenCounter = 0f;
-                justPunched = false;
-            }
-        }
-
-        if (cooldownPunch)
-        {
-            punchTimer += Time.deltaTime;
-            if (punchTimer < punchCooldown)
-            {
-                punchTimer = 0f;
-                cooldownPunch = false;
-            }
-        }
-
-        //Combos for the game
-        if (DashLeft.CheckCombo() && transform.position.x > playerBoundary.LeftBound + DashLength)
-        {
-            transform.position -= transform.right * DashLength;
-        }
-        if(DashRight.CheckCombo() && transform.position.x < playerBoundary.RightBound - DashLength)
-        {
-            transform.position += transform.right * DashLength;
         }
     }
 }

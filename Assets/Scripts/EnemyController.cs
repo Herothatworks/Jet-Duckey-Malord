@@ -20,6 +20,10 @@ public class EnemyController : MonoBehaviour
 
     private bool WaveSpawn;
 
+    private bool deathStart = false;
+    private float deathDelay = 0.5f;
+    private float deathCount = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,54 +48,75 @@ public class EnemyController : MonoBehaviour
         
         if (currentHP > Hitpoints) currentHP = Hitpoints;
 
-        if (currentHP <= 0) gameObject.SetActive(false);
+        if (currentHP <= 0) deathStart = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontalMovement = 0f;
-        float verticalMovement = 0f;
-
-        float movementSpeed = 0f;
-
-        if(trackPlayer.position.x - EnemyStopDistance > transform.position.x)
+        if (!deathStart)
         {
-            horizontalMovement = 1f;
-            movementSpeed = 0.5f;
-            GetComponentInChildren<SpriteRenderer>().flipX = false;
-        }
-        else if(trackPlayer.position.x + EnemyStopDistance < transform.position.x)
-        {
-            horizontalMovement = -1f;
-            movementSpeed = 0.5f;
-            GetComponentInChildren<SpriteRenderer>().flipX = true;
-        }
+            float horizontalMovement = 0f;
+            float verticalMovement = 0f;
 
-        if (trackPlayer.position.z - 0.01f > transform.position.z)
-        {
-            verticalMovement = 1f;
-            movementSpeed = 0.5f;
-        }
-        else if (trackPlayer.position.z + 0.01f < transform.position.z)
-        {
-            verticalMovement = -1f;
-            movementSpeed = 0.5f;
-        }
+            float movementSpeed = 0f;
 
-        AIAnime.SetFloat("Speed", movementSpeed);
-
-        transform.position += transform.right * horizontalMovement * EnemyMoveSpeed * Time.deltaTime;
-        transform.position += transform.forward * verticalMovement * EnemyMoveSpeed * Time.deltaTime;
-
-        if(JustAttacked)
-        {
-            AttackTimer += Time.deltaTime;
-            if(AttackTimer > AttackDelay)
+            if (trackPlayer.position.x - EnemyStopDistance > transform.position.x)
             {
-                AttackTimer = 0f;
-                JustAttacked = false;
+                horizontalMovement = 1f;
+                movementSpeed = 0.5f;
+                GetComponentInChildren<SpriteRenderer>().flipX = false;
             }
+            else if (trackPlayer.position.x + EnemyStopDistance < transform.position.x)
+            {
+                horizontalMovement = -1f;
+                movementSpeed = 0.5f;
+                GetComponentInChildren<SpriteRenderer>().flipX = true;
+            }
+
+            if (trackPlayer.position.z - 0.01f > transform.position.z)
+            {
+                verticalMovement = 1f;
+                movementSpeed = 0.5f;
+            }
+            else if (trackPlayer.position.z + 0.01f < transform.position.z)
+            {
+                verticalMovement = -1f;
+                movementSpeed = 0.5f;
+            }
+
+            AIAnime.SetFloat("Speed", movementSpeed);
+
+            transform.position += transform.right * horizontalMovement * EnemyMoveSpeed * Time.deltaTime;
+            transform.position += transform.forward * verticalMovement * EnemyMoveSpeed * Time.deltaTime;
+
+            if (JustAttacked)
+            {
+                AttackTimer += Time.deltaTime;
+                if (AttackTimer > AttackDelay)
+                {
+                    AttackTimer = 0f;
+                    JustAttacked = false;
+                }
+            }
+        }
+        else
+        {
+            deathCount += Time.deltaTime;
+            if(deathCount >= deathDelay)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "Player":
+                JustAttacked = true;
+                break;
         }
     }
 
@@ -100,7 +125,7 @@ public class EnemyController : MonoBehaviour
         switch(other.tag)
         {
             case "Player":
-                if(!JustAttacked)
+                if(!JustAttacked && !deathStart)
                 {
                     AIAnime.SetTrigger("Punching");
                     other.GetComponent<PlayerControl>().TakeDamage(AttackDamage);
