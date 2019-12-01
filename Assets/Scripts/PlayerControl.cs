@@ -14,6 +14,9 @@ public class PlayerControl : MonoBehaviour
 
     //Player Health Stuff
     public Image healthBar;
+    public Image powerBar;
+    public float PlayerPower;
+    private float currentPower;
     public float PlayerHealth;
     private float currentHealth;
 
@@ -74,6 +77,10 @@ public class PlayerControl : MonoBehaviour
     private float deathDelay = 0.5f;
     private float deathCount = 0f;
 
+    public bool MetalOn = false;
+    public float MetalDamageTaken;
+    public float MetalDamageDone;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -92,7 +99,9 @@ public class PlayerControl : MonoBehaviour
         }
 
         currentHealth = PlayerHealth;
+        currentPower = PlayerPower;
         healthBar.fillAmount = 1f;
+        powerBar.fillAmount = 1f;
     }
 
     //Checks to make sure the player can jump, so we don't have a flying character - yet
@@ -111,6 +120,10 @@ public class PlayerControl : MonoBehaviour
 
     public void TakeDamage(float Health)
     {
+        if(MetalOn)
+        {
+            Health = Health * MetalDamageTaken;
+        }
 
         if (!isInvulnerable)
         {
@@ -133,10 +146,50 @@ public class PlayerControl : MonoBehaviour
 
     }
 
+    public void DrainPower(float Power)
+    {
+        currentPower -= Power;
+
+        if(currentPower > PlayerPower)
+        {
+            currentPower = PlayerPower;
+        }
+
+        if(currentPower <= 0)
+        {
+            currentPower = 0;
+            MetalOn = false;
+        }
+
+        powerBar.fillAmount = currentPower / PlayerPower;
+    }
+
+    public void RestorePower(float Power)
+    {
+        DrainPower(-Power);
+    }
+
+    public void RestoreHealth(float Health)
+    {
+        currentHealth += Health;
+
+        if (currentHealth > PlayerHealth)
+        {
+            currentHealth = PlayerHealth; //Don't go over max health
+        }
+
+        healthBar.fillAmount = currentHealth / PlayerHealth;
+    }
+
     //Instantiate a punch instead of raycast
     void MakeAttack(float Damage)
     {
-        GameObject newPunch = Instantiate(punchForce, punchBox.position, Quaternion.identity, transform) as GameObject;
+        if(MetalOn)
+        {
+            Damage = Damage * MetalDamageDone;
+        }
+
+        GameObject newPunch = Instantiate(punchForce, punchBox.position, transform.rotation, transform) as GameObject;
         newPunch.GetComponent<PunchAttack>().Damage = Damage;
         newPunch.GetComponent<PunchAttack>().hurtEnemy = true;
     }
@@ -199,6 +252,19 @@ public class PlayerControl : MonoBehaviour
                 SceneManager.LoadScene("MainMenu");
             }
 
+            if(Input.GetKeyDown(JetAbilityUse))
+            {
+                MetalOn = !MetalOn;
+            }
+
+            if(MetalOn)
+            {
+                if (currentPower <= 0)
+                    MetalOn = false;
+            }
+
+            playerAnime.SetBool("IsMetal", MetalOn);
+
             //Sets the player to running (or not running)
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -250,6 +316,11 @@ public class PlayerControl : MonoBehaviour
 
                 MakeAttack(PunchDamage);
 
+                if(MetalOn)
+                {
+                    DrainPower(1);
+                }
+
                 justPunched = true;
                 punchBetweenCounter = 0f; //Rest every time a punch goes through.
                 punchTimer = 0f;
@@ -266,6 +337,10 @@ public class PlayerControl : MonoBehaviour
                 playerAnime.SetTrigger("Kick");
                 justKicked = true;
                 MakeAttack(KickDamage);
+                if (MetalOn)
+                {
+                    DrainPower(2);
+                }
             }
 
             if (justKicked)

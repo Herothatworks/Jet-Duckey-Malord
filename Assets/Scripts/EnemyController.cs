@@ -24,6 +24,8 @@ public class EnemyController : MonoBehaviour
     private float deathDelay = 0.5f;
     private float deathCount = 0f;
 
+    public List<GameObject> dropItems;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,23 @@ public class EnemyController : MonoBehaviour
 
         AIAnime.SetTrigger("TakeDamage");
         JustAttacked = true;
-        
+
+        float FlyModifier;
+
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().MetalOn)
+        {
+            FlyModifier = 10f;
+        }
+        else
+        {
+            FlyModifier = 1f;
+        }
+
+        if(trackPlayer.position.x > transform.position.x)
+            transform.position += -transform.right * 0.1f * FlyModifier;
+        else
+            transform.position += transform.right * 0.1f * FlyModifier;
+
         if (currentHP > Hitpoints) currentHP = Hitpoints;
 
         if (currentHP <= 0) deathStart = true;
@@ -132,6 +150,15 @@ public class EnemyController : MonoBehaviour
                     JustAttacked = true;
                 }
                 break;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (dropItems.Count > 0)
+        {
+            int dropMe = Random.Range(0, dropItems.Count);
+            Instantiate(dropItems[dropMe], transform.position, Quaternion.identity);
         }
     }
 }

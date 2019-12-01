@@ -6,14 +6,12 @@ public class PunchAttack : MonoBehaviour
 {
     public float Damage;
     public bool hurtEnemy;
+    public bool EndThis;
 
-    private float LiveTime = 0.3f;
-    private float AliveTime = 0f;
 
-    void Update()
+    void FixedUpdate()
     {
-        AliveTime += Time.deltaTime;
-        if(AliveTime >= LiveTime)
+        if(EndThis)
         {
             Destroy(gameObject);
         }

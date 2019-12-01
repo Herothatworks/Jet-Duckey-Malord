@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906053162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.225, y: 0.064, z: 0}
+  m_LocalPosition: {x: 0.269, y: 0.032, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 8679177440067661740}
@@ -81,6 +81,9 @@ MonoBehaviour:
   PlayerMoveSpeed: 1
   JumpHeight: 4
   PlayerRunSpeed: 3
+  healthBar: {fileID: 0}
+  powerBar: {fileID: 0}
+  PlayerPower: 0
   PlayerHealth: 10
   playerBoundary:
     Upper: 0
@@ -97,6 +100,9 @@ MonoBehaviour:
   timeAllowedBetweenPunches: 1
   singlePunchCooldown: 0.5
   DamageInvulnerabilityTimer: 1
+  MetalOn: 0
+  MetalDamageTaken: 0
+  MetalDamageDone: 0
 --- !u!54 &8679177440067661742
 Rigidbody:
   m_ObjectHideFlags: 0

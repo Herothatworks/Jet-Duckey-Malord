@@ -10,6 +10,7 @@ TagManager:
   - RightLimit
   - PunchArea
   - BlockWalk
+  - Collectible
   layers:
   - Default
   - TransparentFX

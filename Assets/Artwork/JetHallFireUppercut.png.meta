@@ -1,12 +1,57 @@
 fileFormatVersion: 2
 guid: dca6e884d72e06145ad719f1cced603c
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 7237452447994991274
+    second: JetHallFireUppercut_0
+  - first:
+      213: 7598732391719811082
+    second: JetHallFireUppercut_1
+  - first:
+      213: 3328246633065360231
+    second: JetHallFireUppercut_2
+  - first:
+      213: 6072495962333444041
+    second: JetHallFireUppercut_3
+  - first:
+      213: -7110544354202139795
+    second: JetHallFireUppercut_4
+  - first:
+      213: -8630681070494411424
+    second: JetHallFireUppercut_5
+  - first:
+      213: 5756579797772287529
+    second: JetHallFireUppercut_6
+  - first:
+      213: 2360237445944056877
+    second: JetHallFireUppercut_7
+  - first:
+      213: 8399498427311868789
+    second: JetHallFireUppercut_8
+  - first:
+      213: 4199895760175037387
+    second: JetHallFireUppercut_9
+  - first:
+      213: -3772623071609061629
+    second: JetHallFireUppercut_10
+  - first:
+      213: -39547581409846993
+    second: JetHallFireUppercut_11
+  - first:
+      213: -4849471115273971101
+    second: JetHallFireUppercut_12
+  - first:
+      213: -2967380152752810593
+    second: JetHallFireUppercut_13
+  - first:
+      213: -8855560206740461115
+    second: JetHallFireUppercut_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -31,27 +76,27 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
-    wrapU: -1
-    wrapV: -1
+    wrapU: 1
+    wrapV: 1
     wrapW: -1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -63,7 +108,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -72,11 +141,326 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: JetHallFireUppercut_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 840
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b414c2ff8616354e970f312811d0a1c
+      internalID: 7237452447994991274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_1
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 840
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d765c31c825b359488bd1e777a19f6a8
+      internalID: 7598732391719811082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_2
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 840
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6f64e2983d1a0f41aa90533563ff40d
+      internalID: 3328246633065360231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 840
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e05760e7a2284744795f0404c1771365
+      internalID: 6072495962333444041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 560
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a59fb6915d0bb5b4fb2b193dcfbd7193
+      internalID: -7110544354202139795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 560
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30b8ffaa27e5b8042a94a367f4a70e61
+      internalID: -8630681070494411424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_6
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 560
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a13be2453881bd044811776b36157afb
+      internalID: 5756579797772287529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_7
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 560
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1ff01dc34292d44eaa0bdeb09ed8bb4
+      internalID: 2360237445944056877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 280
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b9d9999a56da134caa576c7bc128bab
+      internalID: 8399498427311868789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_9
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 280
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 758d916c2386a8f41a1f19032b3536ff
+      internalID: 4199895760175037387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_10
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 280
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a04bfc9ade42c94880aec2d8c15db63
+      internalID: -3772623071609061629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_11
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 280
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50a8db25962c83f4c921e4add5b2f90e
+      internalID: -39547581409846993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d4b39a49763417478b25b693253234b
+      internalID: -4849471115273971101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_13
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee906305d553d6b44b97b5a102e77fcc
+      internalID: -2967380152752810593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallFireUppercut_14
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 240
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 136113b78a20e8c4a932b67aa547b4f2
+      internalID: -8855560206740461115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a06ac1debf8466f478a2d14cb93f1b47
     internalID: 0
     vertices: []
     indices: 

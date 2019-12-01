@@ -167,6 +167,10 @@ MonoBehaviour:
   AttackDamage: 0
   Hitpoints: 3
   currentHP: 0
+  dropItems:
+  - {fileID: 6843735236818642321, guid: 8e9c86653cf33e04fb3482e9cf5b265a, type: 3}
+  - {fileID: 5946709718215321667, guid: a0abb7a76f091254ebe8f36cb0deef2d, type: 3}
+  - {fileID: 8489117687288113752, guid: 53ecc381cabe6294c8747c531e311a23, type: 3}
 --- !u!65 &1783083008
 BoxCollider:
   m_ObjectHideFlags: 0

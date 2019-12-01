@@ -1,12 +1,66 @@
 fileFormatVersion: 2
 guid: 34ed33a532e94c54cb676fa02c9f9d35
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -1953171040857422825
+    second: JetHallCyclone_0
+  - first:
+      213: -2828372738015756731
+    second: JetHallCyclone_1
+  - first:
+      213: 4661364406476097267
+    second: JetHallCyclone_2
+  - first:
+      213: 1996857178865158278
+    second: JetHallCyclone_3
+  - first:
+      213: -3027645571000213095
+    second: JetHallCyclone_4
+  - first:
+      213: 6458367978174119501
+    second: JetHallCyclone_5
+  - first:
+      213: -9003094329506573806
+    second: JetHallCyclone_6
+  - first:
+      213: -418270380174657327
+    second: JetHallCyclone_7
+  - first:
+      213: 2254893804780608141
+    second: JetHallCyclone_8
+  - first:
+      213: 2269937674045380034
+    second: JetHallCyclone_9
+  - first:
+      213: -3665528901100875381
+    second: JetHallCyclone_10
+  - first:
+      213: 6022078715278743924
+    second: JetHallCyclone_11
+  - first:
+      213: 9042478311466490615
+    second: JetHallCyclone_12
+  - first:
+      213: -2190085312035533262
+    second: JetHallCyclone_13
+  - first:
+      213: 1765762972405611336
+    second: JetHallCyclone_14
+  - first:
+      213: -5362582880328959780
+    second: JetHallCyclone_15
+  - first:
+      213: 622622003831455318
+    second: JetHallCyclone_16
+  - first:
+      213: 7975742123571658994
+    second: JetHallCyclone_17
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -31,27 +85,27 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
-    wrapU: -1
-    wrapV: -1
+    wrapU: 1
+    wrapV: 1
     wrapW: -1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -63,7 +117,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -72,11 +150,389 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: JetHallCyclone_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1040
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a56fadd3b582b65498e629417902aad7
+      internalID: -1953171040857422825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1040
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e1801c5837f7242a389879ab1ed1b5
+      internalID: -2828372738015756731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1040
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59c65f4021460dd4e965a99292e66bda
+      internalID: 4661364406476097267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1040
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 804a03c8cf773604c834cc4fb8958858
+      internalID: 1996857178865158278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 780
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c156940b9c37550429fe16f5bc8924a5
+      internalID: -3027645571000213095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 780
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d86b1eec3ccb6b944a534e2ffb023ad9
+      internalID: 6458367978174119501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 780
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39cabbeefaa15fb4f8474e53ab303b06
+      internalID: -9003094329506573806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_7
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 780
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0abf7fcf57c19c14382c65908b68a63c
+      internalID: -418270380174657327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 520
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2947f0935faf24a40a03884db973f74e
+      internalID: 2254893804780608141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_9
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 520
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9f4e5f6173c3242a30f72002c102a4
+      internalID: 2269937674045380034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_10
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 520
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3abbbc417b35e4c46970975848ffc251
+      internalID: -3665528901100875381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_11
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 520
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b17ffd6a452c6b343955f10aa507b906
+      internalID: 6022078715278743924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 260
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f53c0d86985a6254ca672e6f9c484b2a
+      internalID: 9042478311466490615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_13
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 260
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a704ea9de4a36d46bba23c6d98b88c5
+      internalID: -2190085312035533262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_14
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 260
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884bde7077baf3d44bd9e5bb8487e92d
+      internalID: 1765762972405611336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_15
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 260
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 873600a37ea54b14c8f7753696e0ec59
+      internalID: -5362582880328959780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2644d69bd1218d4f805a551ffa739d0
+      internalID: 622622003831455318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JetHallCyclone_17
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 300
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15354da55208a41408d4d449d6418f00
+      internalID: 7975742123571658994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9f2df768b6983c04fbedeffd6cd1fb0a
     internalID: 0
     vertices: []
     indices: 
