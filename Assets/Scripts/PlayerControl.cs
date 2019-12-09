@@ -100,6 +100,7 @@ public class PlayerControl : MonoBehaviour
 
         currentHealth = PlayerHealth;
         currentPower = PlayerPower;
+        deathStart = false;
         healthBar.fillAmount = 1f;
         powerBar.fillAmount = 1f;
     }
@@ -195,7 +196,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!deathStart)
         {
@@ -210,7 +211,7 @@ public class PlayerControl : MonoBehaviour
             float movingpace = 0f;
 
             //Add Jump stuff
-            if (GroundCheck() && Input.GetKeyDown(JetJump))
+            if (GroundCheck() && Input.GetButtonDown("Jump"))
             {
                 playerRig.AddForce(0, 1 * JumpHeight, 0, ForceMode.Impulse);
                 playerAnime.SetTrigger("Jump");
